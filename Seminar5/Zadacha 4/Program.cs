@@ -1,38 +1,51 @@
-﻿// Задача 38: Задайте с клавиатуры массив ыещественных (double) чисел.
+﻿// Задача 38: Задайте с клавиатуры массив вещественных (double) чисел.
 // Найдите разницу между максимальным и минимальным элементов массива.
 // Задать размер (int) массива с клавиатуры
 // [3 7 22 2 78] => 76
-Console.WriteLine("Введите размер массива");
-int size = Convert.ToInt32(Console.ReadLine());
-int[] numbers = new int[size];
-FillArrayRandomNumbers(numbers);
-Console.WriteLine("Вот наш массив: ");
-PrintArray(numbers);
-int count = 0;
-
-for (int z = 0; z < numbers.Length; z++)
-if (numbers[z] % 2 == 0)
-count++;
-
-Console.WriteLine($"всего {numbers.Length} чисел, {count} из них чётные");
-
-void FillArrayRandomNumbers(int[] numbers)
+double[] CreateRandomArray (int size, int minVal, int maxVal)
 {
-    for(int i = 0; i < numbers.Length; i++)
-    {
-        numbers[i] = new Random().Next(100,1000);
-    }
+    double[] newArray = new double[size];
+
+    for (int i=0; i<size; i++) newArray[i] = new Random().Next(minVal,maxVal + 1);
+    return newArray;
 }
-void PrintArray(int[] numbers)
+void ShowArray (double[] array)
 {
-    Console.Write("[ ");
-    for(int i = 0; i < numbers.Length; i++)
-    {
-        Console.Write(numbers[i] + " ");
-    }
-    Console.Write("]");
-    Console.WriteLine();
+    for (int i = 0; i < array.Length; i++)
+    Console.Write (array[i] + " ");
+    
+Console.WriteLine();
 }
+double FindMinNumber(double[] array)
+{
+    double k=array[0];
+    for (int i = 1; i < array.Length; i++)
+        {
+            if (array[i]<k) k=array[i];
+        }
+    return k;
+}
+double FindMaxNumber(double[] array)
+{
+    double k=array[0];
+    for (int i = 1; i < array.Length; i++)
+        {
+            if (array[i]>k) k=array[i];
+        }
+    return k;
+}
+
+Console.WriteLine ("Задача 38: Задайте массив вещественных чисел. Найдите разницу между максимальным и минимальным элементов массива.");
+Console.Write ("Введите количество элементов массива ");
+int a = Convert.ToInt32(Console.ReadLine());
+Console.Write ("Введите минимальное значение диапазона ");
+int min = Convert.ToInt32(Console.ReadLine());
+Console.Write ("Введите максимальное значение диапазона ");
+int max = Convert.ToInt32(Console.ReadLine());
+
+double[] myArray = CreateRandomArray (a, min, max);
+ShowArray(myArray);
+Console.WriteLine ($"Разница между максимальным ({FindMaxNumber(myArray)}) и минимальным ({FindMinNumber(myArray)}) значениями: {FindMaxNumber(myArray)-FindMinNumber(myArray)}");
 
     
 
